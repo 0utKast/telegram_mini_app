@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "title": "Auditoría Web & Core Web Vitals",
+    "category": "Auditoría",
+    "price": 120,
+    "duration": "1 sesión (1 hora)",
+    "description": "Análisis exhaustivo de rendimiento, SEO técnico, accesibilidad (a11y) y métricas Core Web Vitals (LCP, CLS, INP) con informe de optimización accionable.",
+    "icon": "⚡",
+    "popular": true,
+    "badge": "Más Popular",
+    "features": [
+      "Informe detallado en PDF con diagnóstico Lighthouse",
+      "Detección de cuellos de botella en JavaScript y CSS",
+      "Recomendaciones de arquitectura y CDN",
+      "Videollamada de 30 min para explicar hallazgos"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Desarrollo de Telegram Mini App (TMA)",
+    "category": "Desarrollo",
+    "price": 490,
+    "duration": "4 a 6 días",
+    "description": "Diseño y programación de una Mini App completa en Telegram con autenticación criptográfica segura, backend en Node.js/Python, base de datos y bot interactivo.",
+    "icon": "🤖",
+    "popular": true,
+    "badge": "Top Ventas",
+    "features": [
+      "Frontend responsivo integrado con Telegram SDK",
+      "Validación de identidad con initData (HMAC-SHA256)",
+      "Bot con respuestas automáticas y recibos",
+      "Despliegue y configuración con BotFather"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Landing Page de Alta Conversión",
+    "category": "Desarrollo",
+    "price": 380,
+    "duration": "3 a 5 días",
+    "description": "Página de aterrizaje moderna, ultrarrápida y 100% adaptada a móviles con animaciones sutiles, formulario de captación de leads y SEO optimizado.",
+    "icon": "🚀",
+    "popular": false,
+    "badge": "Esencial",
+    "features": [
+      "Diseño a medida (Figma / TailwindCSS)",
+      "Puntuación 95+ en Google PageSpeed",
+      "Integración con CRM o email marketing",
+      "Dominio y certificado SSL incluidos en el setup"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Consultoría Técnica 1-on-1",
+    "category": "Consultoría",
+    "price": 75,
+    "duration": "45 minutos",
+    "description": "Sesión individual por videollamada para resolver dudas de arquitectura, selección de stack tecnológico, revisión de código o estrategia de producto.",
+    "icon": "💡",
+    "popular": false,
+    "badge": "Express",
+    "features": [
+      "Revisión en vivo de tu repositorio o proyecto",
+      "Resolución de bloqueos técnicos específicos",
+      "Grabación de la sesión para consulta posterior",
+      "Soporte por chat durante las 48h posteriores"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Integración de Pasarelas de Pago / API",
+    "category": "Desarrollo",
+    "price": 240,
+    "duration": "2 a 3 días",
+    "description": "Implementación segura de cobros con Stripe, PayPal, Telegram Stars o APIs de terceros (autenticación OAuth, webhooks, base de datos).",
+    "icon": "💳",
+    "popular": false,
+    "badge": "Seguridad",
+    "features": [
+      "Configuración de webhooks y firmas de seguridad",
+      "Checkout sin fricción con tarjeta y Apple/Google Pay",
+      "Manejo de suscripciones y cancelaciones",
+      "Entorno de pruebas (Sandbox) verificado"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Mantenimiento & Soporte Mensual",
+    "category": "Soporte",
+    "price": 95,
+    "duration": "Mensual",
+    "description": "Supervisión continua, actualización de dependencias, copias de seguridad automáticas y resolución prioritaria de incidencias en tu aplicación web.",
+    "icon": "🛡️",
+    "popular": false,
+    "badge": "Continuo",
+    "features": [
+      "Monitorización de uptime 24/7",
+      "Backups semanales en la nube",
+      "Hasta 3 horas de ajustes y cambios menores al mes",
+      "Tiempo de respuesta garantizado < 4 horas"
+    ]
+  }
+]

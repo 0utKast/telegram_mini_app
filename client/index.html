@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DevStudio — Servicios & Reservas</title>
+  
+  <!-- Script oficial de Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  
+  <!-- Fuentes e iconos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- BARRA DE SIMULACIÓN (Solo visible si se abre fuera de Telegram en navegador estándar) -->
+  <aside id="tg-simulator-bar" class="simulator-bar" style="display: none;">
+    <div class="sim-content">
+      <span class="sim-badge">🧪 Modo Navegador</span>
+      <span class="sim-text">Simulando Telegram WebApp</span>
+      <div class="sim-actions">
+        <button id="sim-toggle-theme" class="sim-btn" title="Cambiar Tema Claro / Oscuro">🌓 Tema</button>
+        <button id="sim-user-switch" class="sim-btn" title="Cambiar usuario simulado">👤 Usuario</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENEDOR PRINCIPAL DE LA MINI APP -->
+  <div id="app" class="app-container">
+    
+    <!-- CABECERA -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-icon">⚡</div>
+        <div class="brand-info">
+          <h1 class="brand-title">DevStudio</h1>
+          <p class="brand-subtitle">Servicios & Consultoría Web</p>
+        </div>
+      </div>
+      <div class="user-pill" id="user-pill">
+        <div class="user-avatar" id="user-avatar">💻</div>
+        <span class="user-name" id="user-name">Invitado</span>
+      </div>
+    </header>
+
+    <!-- NAVEGACIÓN PRINCIPAL / PESTAÑAS -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="catalog">
+        <span class="tab-icon">💼</span>
+        <span class="tab-label">Catálogo</span>
+      </button>
+      <button class="tab-btn" data-tab="booking" id="tab-booking-btn">
+        <span class="tab-icon">📅</span>
+        <span class="tab-label">Reservar</span>
+        <span class="cart-badge" id="selected-service-badge" style="display: none;">1</span>
+      </button>
+      <button class="tab-btn" data-tab="orders">
+        <span class="tab-icon">📋</span>
+        <span class="tab-label">Mis Reservas</span>
+      </button>
+    </nav>
+
+    <!-- CONTENIDO: PESTAÑA CATÁLOGO -->
+    <main id="tab-catalog" class="tab-view active">
+      <!-- Banner Hero -->
+      <section class="hero-banner">
+        <div class="hero-text">
+          <h2>Impulsa tu proyecto digital</h2>
+          <p>Desarrollo full-stack, auditorías de velocidad y Mini Apps a medida.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">+40</span>
+            <span class="stat-label">Proyectos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Garantía</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filtros de categoría -->
+      <section class="category-filters" id="category-filters">
+        <button class="filter-chip active" data-category="Todos">Todos</button>
+        <button class="filter-chip" data-category="Desarrollo">Desarrollo</button>
+        <button class="filter-chip" data-category="Consultoría">Consultoría</button>
+        <button class="filter-chip" data-category="Auditoría">Auditoría</button>
+        <button class="filter-chip" data-category="Soporte">Soporte</button>
+      </section>
+
+      <!-- Grid de Servicios -->
+      <section class="services-grid" id="services-grid">
+        <!-- Renderizado dinámicamente -->
+        <div class="loading-spinner">Cargando catálogo de servicios...</div>
+      </section>
+    </main>
+
+    <!-- CONTENIDO: PESTAÑA RESERVA / CHECKOUT -->
+    <main id="tab-booking" class="tab-view">
+      <div class="booking-card">
+        <h3 class="section-heading">Detalles de la Reserva</h3>
+        
+        <!-- Servicio seleccionado -->
+        <div id="booking-selected-service" class="selected-service-box">
+          <div class="empty-selection">
+            <span class="empty-icon">👈</span>
+            <p>Selecciona primero un servicio del catálogo</p>
+            <button class="btn-secondary" id="btn-go-to-catalog">Ver Catálogo</button>
+          </div>
+        </div>
+
+        <form id="booking-form" style="display: none;">
+          <!-- Modalidad -->
+          <div class="form-group">
+            <label class="form-label">Modalidad del Servicio</label>
+            <div class="segmented-control" id="booking-type-selector">
+              <button type="button" class="segment-btn active" data-type="Online (Videollamada)">📹 Videollamada</button>
+              <button type="button" class="segment-btn" data-type="Desarrollo Asíncrono">💻 Proyecto/Código</button>
+            </div>
+          </div>
+
+          <!-- Selector de Fecha -->
+          <div class="form-group">
+            <label class="form-label" for="booking-date">Fecha Deseada</label>
+            <input type="date" id="booking-date" class="form-input" required>
+          </div>
+
+          <!-- Selector de Franja Horaria -->
+          <div class="form-group">
+            <label class="form-label">Hora Preferida (Zona horaria local)</label>
+            <div class="time-slots-grid" id="time-slots">
+              <button type="button" class="time-slot" data-time="09:30">09:30</button>
+              <button type="button" class="time-slot active" data-time="11:00">11:00</button>
+              <button type="button" class="time-slot" data-time="13:00">13:00</button>
+              <button type="button" class="time-slot" data-time="16:00">16:00</button>
+              <button type="button" class="time-slot" data-time="17:30">17:30</button>
+              <button type="button" class="time-slot" data-time="19:00">19:00</button>
+            </div>
+          </div>
+
+          <!-- Notas / Requisitos -->
+          <div class="form-group">
+            <label class="form-label" for="booking-notes">Notas / Enlaces del Proyecto (Opcional)</label>
+            <textarea id="booking-notes" class="form-textarea" rows="3" placeholder="Ej: Repositorio GitHub, objetivo de la landing page, problemas de velocidad..."></textarea>
+          </div>
+
+          <!-- Resumen de Coste -->
+          <div class="price-summary-box">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="summary-subtotal">0,00 €</span>
+            </div>
+            <div class="summary-row">
+              <span>Impuestos (incluidos)</span>
+              <span>21%</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total a Pagar</span>
+              <span id="summary-total" class="total-price">0,00 €</span>
+            </div>
+          </div>
+
+          <!-- Botón de fallback para navegadores de escritorio -->
+          <button type="submit" class="btn-submit-booking" id="fallback-submit-btn">
+            Confirmar Reserva
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <!-- CONTENIDO: PESTAÑA MIS RESERVAS -->
+    <main id="tab-orders" class="tab-view">
+      <div class="orders-header">
+        <h3 class="section-heading">Tus Reservas Activas</h3>
+        <button class="btn-refresh" id="btn-refresh-orders" title="Actualizar">🔄</button>
+      </div>
+      <div class="orders-list" id="orders-list">
+        <div class="loading-spinner">Cargando tus reservas...</div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- MODAL DE DETALLE DE SERVICIO -->
+  <div id="service-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-dialog">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-body" id="modal-service-content">
+        <!-- Renderizado dinámico -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="modal-btn-select">Reservar este Servicio</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script principal de la aplicación -->
+  <script src="app.js"></script>
+</body>
+</html>

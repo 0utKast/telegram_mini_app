@@ -1,0 +1,21 @@
+{
+  "name": "telegram-mini-app-services",
+  "version": "1.0.0",
+  "description": "Telegram Mini App de Servicios y Reservas para Desarrollador Web",
+  "main": "start.js",
+  "type": "module",
+  "scripts": {
+    "start": "node start.js",
+    "server": "node server/index.js",
+    "tunnel": "node tunnel.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "localtunnel": "^2.0.2"
+  }
+}
